@@ -149,7 +149,7 @@ Final TF tree is fully connected: `odom → base_link → {lidar_link, 4× wheel
 1) Visual confirmation of LaserScan data in RViz (Part 12) and full mesh rendering of the LiDAR sensor in the 3D Simulator were affected by a confirmed platform-side rendering issue 
 in the simulator's sensor pipeline, acknowledged by course staff during this task. All underlying configuration — URDF mesh/sensor definitions, the `gpu_lidar` plugin, and the `/scan` topic 
 bridge — was implemented and verified correct via `ros2 topic list` and `ros2 topic echo`; the remaining issue is a known simulator rendering bug rather than an error in this package.
-2) Part 10 was completed but as mentioned in the email, the lidar was not being registered in the URDF. This may be to an issue in my code or due to the software issue mentioned earlier
+2) Part 10 was completed but as mentioned in the email, the lidar was not being registered in the URDF. This may be to an issue in my code or due to the software issue mentioned earlier. When the mesh file was replaced with a simple cylinder, the object was realized, making it more likely to be an issue from the mesh file than the code itself.
 ---
 URDF View (VS Code URDF Visualizer):
 
@@ -167,6 +167,9 @@ Teleop Terminal:
 RViz — Odometry (Fixed Frame = odom):
 <img width="762" height="518" alt="Screenshot 2026-06-23 123716" src="https://github.com/user-attachments/assets/197a62de-21a3-45f8-8bb5-36f6dd8b38e0" />
 
+URDF View (With Lidar "Cylinder")
+
+<img width="214" height="175" alt="image" src="https://github.com/user-attachments/assets/73379417-0649-455e-8eea-93b1e6eebd47" />
 
 TF Tree (`ros2 run tf2_tools view_frames`):
 <img width="1004" height="341" alt="Screenshot 2026-06-23 141514" src="https://github.com/user-attachments/assets/b1838580-8a3e-401d-a9c9-849e77abc1cb" />
