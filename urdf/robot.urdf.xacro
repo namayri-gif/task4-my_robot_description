@@ -109,20 +109,29 @@
             <right_joint>right_front_wheel_joint</right_joint>
             <left_joint>left_back_wheel_joint</left_joint>
             <right_joint>right_back_wheel_joint</right_joint>
+
             <wheel_separation>${2 * wheel_y_offset}</wheel_separation>
             <wheel_diameter>${2 * wheel_radius}</wheel_diameter>
+
             <topic>/cmd_vel</topic>
+
             <odom_frame>odom</odom_frame>
             <robot_base_frame>base_footprint</robot_base_frame>
+
             <publish_odom>true</publish_odom>
             <publish_odom_tf>true</publish_odom_tf>
+
             <update_rate>50</update_rate>
+
             <max_linear_velocity>0.5</max_linear_velocity>
             <min_linear_velocity>-0.5</min_linear_velocity>
+
             <max_angular_velocity>1.0</max_angular_velocity>
             <min_angular_velocity>-1.0</min_angular_velocity>
+
             <max_linear_acceleration>1.0</max_linear_acceleration>
             <min_linear_acceleration>-1.0</min_linear_acceleration>
+            
             <max_angular_acceleration>2.0</max_angular_acceleration>
             <min_angular_acceleration>-2.0</min_angular_acceleration>
         </plugin>

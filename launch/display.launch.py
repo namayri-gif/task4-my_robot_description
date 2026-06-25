@@ -1,34 +1,44 @@
+import os
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
-from launch_ros.substitutions import FindPackageShare
-import os
+from launch_ros.parameter_descriptions import ParameterValue
+from launch.substitutions import Command
+
 
 def generate_launch_description():
-    pkg_share = FindPackageShare(package='my_robot_description').find('my_robot_description')
-    urdf_path = os.path.join(pkg_share, 'urdf', 'robot.urdf.xacro')
+    pkg_share = get_package_share_directory('my_robot_description')
+    xacro_file = os.path.join(pkg_share, 'urdf', 'robot.urdf.xacro')
+    rviz_config_path = os.path.join(pkg_share, 'rviz', 'robot.rviz')
+
+    robot_description = ParameterValue(
+        Command(["xacro ", xacro_file]),
+        value_type=str
+    )
+
+    robot_state_publisher = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        output='screen',
+        parameters=[{'robot_description': robot_description}]
+    )
+
+    joint_state_publisher_gui = Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        name='joint_state_publisher_gui',
+    )
+
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', rviz_config_path]
+    )
 
     return LaunchDescription([
-
-        Node(
-            package='joint_state_publisher_gui',
-            executable='joint_state_publisher_gui',
-            name='joint_state_publisher_gui',
-        ),
-
-        Node(
-            package='robot_state_publisher',
-            executable='robot_state_publisher',
-            name='robot_state_publisher',
-            parameters=[{'robot_description': open(urdf_path).read()}]
-        ),
-
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            output='screen',
-        )
+        robot_state_publisher,
+        joint_state_publisher_gui,
+        rviz_node
     ])
-
