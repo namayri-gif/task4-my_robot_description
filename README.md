@@ -177,7 +177,8 @@ URDF View (With Lidar "Cylinder")
 
 TF Tree (`ros2 run tf2_tools view_frames`):
 
-<img width="1004" height="341" alt="Screenshot 2026-06-23 141514" src="https://github.com/user-attachments/assets/b1838580-8a3e-401d-a9c9-849e77abc1cb" />
+<img width="953" height="336" alt="image" src="https://github.com/user-attachments/assets/3fe9a284-0371-4291-a972-213e9566c56d" />
+
 
 Demo Video Link
 
