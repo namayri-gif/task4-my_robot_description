@@ -3,10 +3,13 @@
 
     <xacro:property name="wheel_y_offset" value="0.15"/>
     <xacro:property name="wheel_radius"   value="0.07"/>
+
     <gazebo>
         <plugin name="gz::sim::systems::DiffDrive" filename="gz-sim-diff-drive-system">
             <left_joint>left_front_wheel_joint</left_joint>
+            <left_joint>left_back_wheel_joint</left_joint>
             <right_joint>right_front_wheel_joint</right_joint>
+            <right_joint>right_back_wheel_joint</right_joint>
 
             <wheel_separation>${2 * wheel_y_offset}</wheel_separation>
             <wheel_diameter>${2 * wheel_radius}</wheel_diameter>
@@ -29,7 +32,7 @@
             <min_linear_acceleration>-1.0</min_linear_acceleration>
             <max_angular_acceleration>2.0</max_angular_acceleration>
             <min_angular_acceleration>-2.0</min_angular_acceleration>
-        </plugin>   
+        </plugin>
     </gazebo>
 
     <gazebo>

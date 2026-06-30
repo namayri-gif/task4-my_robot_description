@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+
+     <xacro:include filename="$(find my_robot_description)/urdf/robot.gazebo.xacro"/>
+
     <xacro:property name="base_length" value="0.3"/>
     <xacro:property name="base_width"  value="0.3"/>
     <xacro:property name="base_height" value="0.2"/>
@@ -53,7 +56,7 @@
 
     <link name="lidar_link">
         <visual>
-            <geometry><mesh filename="$(dirname)/../meshes/lidar.STL"/></geometry>
+            <geometry><mesh filename="package://my_robot_description/meshes/lidar.STL"/></geometry>
             <material name="lidar_gray"><color rgba="0.5 0.5 0.5 1.0"/></material>
         </visual>
         <collision>
