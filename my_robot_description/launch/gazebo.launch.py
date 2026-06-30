@@ -35,10 +35,13 @@ def generate_launch_description():
     # <cylinder> for lidar_link, not a <mesh> tag. Add mesh_path back
     # here only if you reintroduce a <mesh> reference in the xacro.
     robot_description = ParameterValue(
-        Command(["xacro ", xacro_file]),
+        Command([
+            "xacro ",
+            xacro_file,
+            f" mesh_path:=file://{meshes_path}/"
+        ]),
         value_type=str
     )
-
     # Sets GZ_SIM_RESOURCE_PATH for this launch only -- safer than
     # relying on ~/.bashrc, which we found wasn't actually persisting.
     gazebo_resource_path = SetEnvironmentVariable(
@@ -94,10 +97,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Delay spawn so robot_state_publisher is guaranteed to be
-    # publishing /robot_description before 'create' tries to read it
-    delayed_spawn = TimerAction(period=3.0, actions=[spawn_robot])
-
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -107,12 +106,10 @@ def generate_launch_description():
         output='screen'
     )
 
-
     return LaunchDescription([
         gazebo_resource_path,
         gazebo,
         robot_state_publisher,
-        delayed_spawn,
         bridge,
         joint_state_publisher
     ])
